@@ -13,6 +13,10 @@ void swap_node(listint_t **header, listint_t *pre, listint_t *act)
 	listint_t *prevprev = pre->prev;
 	listint_t *nextnext = act->next;
 
+	//print_list(*header);
+	if (prevprev == NULL)
+		*header = act;
+
 	if (prevprev != NULL && prevprev->next != NULL)
 		prevprev->next = act;
 
@@ -22,9 +26,17 @@ void swap_node(listint_t **header, listint_t *pre, listint_t *act)
 	pre->prev = act;
 
 	pre->next = nextnext;
-	nextnext->prev = pre;
-	if (prevprev == NULL)
-		*header = pre;
+	if (nextnext != NULL)
+		nextnext->prev = pre;
+	//print_list(*header);
+	if (prevprev != NULL && (prevprev->n > act->n))
+	{
+		print_list(*header);
+		pre = prevprev;
+		swap_node(header, pre, act);
+		// no no print_list(*header);
+	}
+	// no no print_list(*header);
 }
 /**
  * insertion_sort_list - use the insertion algo
@@ -32,30 +44,31 @@ void swap_node(listint_t **header, listint_t *pre, listint_t *act)
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *precedent = NULL, *actuel = NULL, *header = NULL;
+	listint_t *precedent = NULL, *header = NULL;
 	int j = 0;
 
 	if (*list == NULL)
 		return;
 
 	header = *list;
-	while (header->next)
+	while (header)
 	{
-		if (header->prev == NULL) /* Je suis au premier numero */
+		if (j == 0) /* Je suis au premier numero */
 		{
 			j++;
 			header = header->next;
 			continue;
 		}
 		precedent = header->prev;
-		actuel = header;
-		if (precedent->n > actuel->n)
+		if (precedent->n > header->n)
 		{
-			swap_node(list, precedent, actuel);
+
+			swap_node(list, precedent, header);
 			print_list(*list);
+
 		}
-	j++;
-	header = header->next;
+		j++;
+		header = header->next;
 	}
 
 }
