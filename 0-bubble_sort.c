@@ -3,7 +3,7 @@
 #include "sort.h"
 void bubble_sort(int *array, size_t size)
 {
-	int temp = 0;
+	int temp;
 	int i, j;
 
 	for (i = 0; i < ((int)size) - 1; i++)
@@ -17,6 +17,7 @@ void bubble_sort(int *array, size_t size)
 				array[j + 1] = temp;
 				print_array(array, size);
 				printf("\n");
+
 			}
 		}
 	}
