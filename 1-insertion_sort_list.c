@@ -44,7 +44,7 @@ void insertion_sort_list(listint_t **list)
 	listint_t *precedent = NULL, *header = NULL;
 	int j = 0;
 
-	if (*list == NULL)
+	if (list == NULL)
 		return;
 
 	header = *list;
