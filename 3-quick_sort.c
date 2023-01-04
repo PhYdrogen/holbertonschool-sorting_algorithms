@@ -1,4 +1,19 @@
 #include "sort.h"
+
+int loop = 0;
+/**
+ * swap - swaping two number
+ * @i: number 1
+ * @j: number 2
+ * Return: none
+ */
+void swap(int *i, int *j)
+{
+	int tmp = *i;
+	*i = *j;
+	*j = tmp;
+}
+
 /**
  * partition - swap and mix
  * @array: the array
@@ -9,32 +24,24 @@
  */
 int partition(int *array, int bas, int haut, int size)
 {
-	int tmp = 0, i = 0, j = 0, change = 0, printed = 0;
-	int pivot = array[haut];
+	int pivot = array[haut], i = bas, j = bas;
 
-	i = bas - 1;
-	if (i == 0)
+	for (; j < haut; ++j)
 	{
-		print_array(array, size);
-		printed = 1;
-	}
-	for (j = bas; j <= (haut - 1); j++)
-	{
-		if (array[j] <= pivot)
+		if (array[j] < pivot)
 		{
-			i++;
-			tmp = array[i];
-			array[i] = array[j];
-			array[j] = tmp;
-			change++;
+			swap(&array[i], &array[j]);
+			++i;
 		}
 	}
-	if (change != 0 && printed == 0)
+	if (loop != 0)
 		print_array(array, size);
-	i++;
-	tmp = array[i];
-	array[i] = array[haut];
-	array[haut] = tmp;
+
+	loop++;
+	swap(&array[i], &array[haut]);
+	if (loop == 1)
+		print_array(array, size);
+
 
 	return (i);
 }
@@ -69,7 +76,7 @@ void quick_sort(int *array, size_t size)
 	int low = 0;
 	int high = size - 1;
 
-	if (array == NULL || size < 1)
+	if (array == NULL || size <= 1)
 		return;
 
 	quick_sort_xd(array, low, high, size);
