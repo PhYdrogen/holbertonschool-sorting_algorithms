@@ -22,15 +22,11 @@ int partition(int *array, int bas, int haut, int size)
 	{
 		if (array[j] <= pivot)
 		{
-			//trop de ligne print_array(array, size);
 			i++;
-			/* swap */
 			tmp = array[i];
 			array[i] = array[j];
 			array[j] = tmp;
-			/* */
 			change++;
-			//print_array(array, size);
 		}
 	}
 	if (change != 0 && printed == 0)
@@ -39,7 +35,6 @@ int partition(int *array, int bas, int haut, int size)
 	tmp = array[i];
 	array[i] = array[haut];
 	array[haut] = tmp;
-	//print_array(array, size);
 
 	return (i);
 }
@@ -56,15 +51,12 @@ void quick_sort_xd(int *array, int low, int high, int size)
 
 	if (low > high)
 	{
-		//print_array(array, size);
 		return;
 	}
 
 	pivot = partition(array, low, high, size);
-	//bof print_array(array, size);
 	quick_sort_xd(array, low, pivot - 1, size);
 	quick_sort_xd(array, pivot + 1, high, size);
-	//no print_array(array, size);
 
 }
 /**
@@ -80,7 +72,6 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size < 1)
 		return;
 
-	// non y'a pas le switch print_array(array, size);
 	quick_sort_xd(array, low, high, size);
 	print_array(array, size);
 }
