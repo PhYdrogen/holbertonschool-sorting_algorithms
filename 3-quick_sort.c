@@ -1,6 +1,5 @@
 #include "sort.h"
 
-int loop = 0;
 /**
  * swap - swaping two number
  * @i: number 1
@@ -30,19 +29,19 @@ int partition(int *array, int bas, int haut, int size)
 	{
 		if (array[j] < pivot)
 		{
-			swap(&array[i], &array[j]);
+			if (i != j)
+			{
+				swap(&array[i], &array[j]);
+				print_array(array, size);
+			}
 			++i;
 		}
 	}
-	if (loop != 0)
+	if (array[haut] < array[i])
+	{
+		swap(&array[i], &array[haut]);
 		print_array(array, size);
-
-	loop++;
-	swap(&array[i], &array[haut]);
-	if (loop == 1)
-		print_array(array, size);
-
-
+	}
 	return (i);
 }
 /**
@@ -80,5 +79,4 @@ void quick_sort(int *array, size_t size)
 		return;
 
 	quick_sort_xd(array, low, high, size);
-	print_array(array, size);
 }
